@@ -60,7 +60,7 @@ class InMemoryProvider extends Provider with LazyLogging {
         val filteredFiles: List[Content] = matchResults.filterNot(f => commonPrefixes.exists(p => f.key.startsWith(p))).toList
         val count = maxkeys.getOrElse(Int.MaxValue)
         val result = filteredFiles.sortBy(_.key)
-        ListBucket(bucket, prefix, delimiter, commonPrefixes, result.take(count).take(count), isTruncated = result.size>count)
+        ListBucket(bucket, prefix, delimiter, commonPrefixes, result.take(count).take(count), maxkeys, isTruncated = result.size>count)
       case None => throw NoSuchBucketException(bucket)
     }
   }
