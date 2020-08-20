@@ -7,7 +7,7 @@ import akka.http.scaladsl.model.DateTime
   * Created by shutty on 8/9/16.
   */
 case class Content(key:String, lastModified:DateTime, md5:String, size:Long, storageClass:String)
-case class ListBucket(bucket:String, prefix: Option[String], delimiter: Option[String], commonPrefixes: List[String], contents:List[Content], maxKeys: String = "1000", isTruncated: Boolean) {
+case class ListBucket(bucket:String, prefix: Option[String], delimiter: Option[String], commonPrefixes: List[String], contents:List[Content], maxKeys: Int = 1000, isTruncated: Boolean) {
   def toXML =
     <ListBucketResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
       <Name>{bucket}</Name>
