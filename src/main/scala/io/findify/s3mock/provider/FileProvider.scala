@@ -64,7 +64,7 @@ class FileProvider(dir:String) extends Provider with LazyLogging {
     val filteredFiles = files.filterNot(f => commonPrefixes.exists(p => f.key.startsWith(p)))
     val count = maxkeys.getOrElse(Int.MaxValue)
     val result = filteredFiles.sortBy(_.key)
-    ListBucket(bucket, prefix, delimiter, commonPrefixes, result.take(count), isTruncated = result.size>count)
+    ListBucket(bucket, prefix, delimiter, commonPrefixes, result.take(count), maxkeys, isTruncated = result.size>count)
   }
 
   override def createBucket(name:String, bucketConfig:CreateBucketConfiguration) = {
